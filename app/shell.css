@@ -1,0 +1,239 @@
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+.navbar {
+  position: sticky; top: 0; z-index: 40;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  padding: 16px clamp(16px, 4vw, 48px);
+  background: rgba(8, 24, 21, 0.78);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+:root[data-theme='light'] .navbar { background: rgba(250, 246, 236, 0.85); }
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-mark { width: 38px; height: 38px; flex-shrink: 0; }
+.brand-text { display: flex; flex-direction: column; line-height: 1.1; }
+.brand-text .ar { font-family: 'Aref Ruqaa'; font-size: 1.1rem; color: var(--gold-bright); }
+.brand-text .en { font-size: 0.65rem; letter-spacing: 0.14em; color: var(--ivory-faint); }
+.brand-author {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.9rem;
+  color: var(--gold); white-space: nowrap; padding-inline-start: 14px; margin-inline-start: 4px;
+  border-inline-start: 1px solid var(--line-strong);
+}
+@media (max-width: 640px) { .brand-author { display: none; } }
+.nav-links { display: flex; align-items: center; gap: 4px; }
+.nav-links a { color: var(--ivory-dim); font-size: 0.92rem; padding: 9px 15px; border-radius: 999px; transition: all 0.2s var(--ease); }
+.nav-links a:hover { color: var(--ivory); background: rgba(201, 162, 76, 0.08); }
+.nav-links a.active { color: var(--gold-bright); background: rgba(201, 162, 76, 0.12); }
+.navbar-actions { display: flex; align-items: center; gap: 8px; }
+.icon-btn {
+  width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: rgba(128, 128, 128, 0.06); border: 1px solid var(--line); color: var(--ivory-dim);
+  transition: all 0.2s var(--ease);
+}
+.icon-btn:hover { border-color: var(--line-strong); color: var(--gold-bright); }
+.icon-btn.active { color: var(--gold-bright); border-color: var(--gold-bright); }
+.icon-btn.sm { width: 32px; height: 32px; }
+.icon-btn svg { width: 17px; height: 17px; }
+.icon-btn.sm svg { width: 14px; height: 14px; }
+.fav-btn { background: none; border: none; color: var(--ivory-faint); position: absolute; top: 14px; inset-inline-end: 14px; z-index: 2; }
+.fav-btn.active { color: var(--danger); }
+.fav-btn svg { width: 18px; height: 18px; }
+
+@media (max-width: 860px) { .nav-links { display: none; } }
+
+/* Mobile bottom nav */
+.mobile-nav {
+  display: none; position: fixed; bottom: 0; inset-inline: 0; z-index: 70;
+  background: rgba(8, 20, 17, 0.96); border-top: 1px solid var(--line);
+  justify-content: space-around; padding: 8px 6px calc(8px + env(safe-area-inset-bottom, 0px));
+  height: var(--bottom-nav-h);
+}
+:root[data-theme='light'] .mobile-nav { background: rgba(250, 246, 236, 0.97); }
+.mobile-nav a { color: var(--ivory-faint); font-size: 0.68rem; flex: 1; text-align: center; }
+.mobile-nav a.active { color: var(--gold-bright); }
+@media (max-width: 860px) {
+  .mobile-nav { display: flex; }
+  :root { --bottom-nav-h: calc(58px + env(safe-area-inset-bottom, 0px)); }
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero { position: relative; padding: clamp(56px, 10vh, 100px) clamp(16px, 5vw, 48px) 80px; display: flex; flex-direction: column; align-items: center; text-align: center; overflow: hidden; }
+.hero-frame { position: absolute; inset: 20px; border: 1px solid var(--line); border-radius: 36px; pointer-events: none; }
+.hero-eyebrow { color: var(--teal-bright); font-size: 0.82rem; margin-bottom: 22px; display: flex; align-items: center; gap: 10px; }
+.hero-eyebrow .line { width: 30px; height: 1px; background: var(--teal-bright); display: inline-block; }
+.hero-title { font-size: clamp(2.8rem, 8vw, 5.4rem); color: var(--gold-bright); margin: 0 0 4px; }
+.hero-subtitle { font-style: italic; font-size: clamp(1.25rem, 3vw, 1.9rem); color: var(--ivory-dim); margin: 0 0 24px; }
+.hero-desc { max-width: 540px; color: var(--ivory-faint); font-size: 1rem; margin-bottom: 36px; }
+.hero-search { width: 100%; max-width: 580px; display: flex; align-items: center; gap: 10px; background: var(--bg-glass); backdrop-filter: blur(10px); border: 1px solid var(--line-strong); border-radius: 999px; padding: 8px 8px 8px 20px; margin-bottom: 34px; }
+[dir="rtl"] .hero-search { padding: 8px 20px 8px 8px; }
+.hero-search input { flex: 1; background: none; border: none; outline: none; color: var(--ivory); font-size: 0.98rem; padding: 9px 0; }
+.hero-search button { background: var(--gold); color: #17251f; border: none; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.hero-search button svg { width: 17px; height: 17px; }
+.hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+.hero-stats { display: flex; gap: clamp(22px, 6vw, 56px); margin-top: 56px; flex-wrap: wrap; justify-content: center; }
+.hero-stat .num { font-size: 2rem; color: var(--gold-bright); }
+.hero-stat .label { font-size: 0.78rem; color: var(--ivory-faint); }
+
+.feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
+.feature-card { padding: 26px 22px; }
+.feature-card h3 { font-size: 1rem; margin: 0 0 8px; }
+.feature-card p { font-size: 0.86rem; color: var(--ivory-faint); margin: 0; }
+
+/* =========================================================
+   SURAH / RECITER CARDS
+   ========================================================= */
+.surah-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 14px; }
+.surah-card {
+  display: flex; align-items: center; gap: 16px; padding: 16px 18px;
+  border: 1px solid var(--line); border-radius: var(--radius-m); background: rgba(128, 128, 128, 0.02);
+  transition: all 0.2s var(--ease);
+}
+.surah-card:hover { border-color: var(--gold-dim); transform: translateY(-2px); }
+.surah-num {
+  width: 42px; height: 42px; border-radius: 12px; flex-shrink: 0; border: 1px solid var(--line-strong);
+  display: flex; align-items: center; justify-content: center; transform: rotate(45deg);
+  font-family: 'Cormorant Garamond'; color: var(--gold-bright);
+}
+.surah-num span { transform: rotate(-45deg); }
+.surah-info { flex: 1; min-width: 0; }
+.surah-info .en { font-size: 0.9rem; font-weight: 600; }
+.surah-info .meta { font-size: 0.74rem; color: var(--ivory-faint); margin-top: 2px; }
+.surah-ar { font-size: 1.3rem; color: var(--gold-bright); flex-shrink: 0; }
+
+.reciter-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px; }
+.reciter-card { position: relative; border: 1px solid var(--line); border-radius: var(--radius-l); background: rgba(128, 128, 128, 0.02); transition: all 0.2s var(--ease); }
+.reciter-card:hover { border-color: var(--gold-dim); transform: translateY(-3px); }
+.reciter-card-link { display: block; padding: 26px 20px; text-align: center; }
+.reciter-avatar {
+  width: 74px; height: 74px; border-radius: 50%; margin: 0 auto 14px;
+  background: radial-gradient(circle at 30% 30%, var(--teal-bright), var(--bg-panel-2));
+  display: flex; align-items: center; justify-content: center; font-family: 'Aref Ruqaa'; font-size: 1.5rem; color: var(--gold-bright);
+  border: 1px solid var(--line-strong);
+}
+.reciter-card .name-en { font-size: 0.76rem; color: var(--ivory-faint); margin-top: 4px; }
+.reciter-card .style-tag { display: inline-block; margin-top: 10px; font-size: 0.7rem; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--line); color: var(--teal-bright); }
+
+.continue-strip { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 8px; }
+.continue-card { flex: 0 0 260px; padding: 16px; display: flex; gap: 14px; align-items: center; }
+.continue-art { width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0; background: linear-gradient(135deg, var(--teal), var(--bg-panel-2)); display: flex; align-items: center; justify-content: center; color: var(--gold-bright); }
+.continue-meta .surah { font-weight: 600; font-size: 0.92rem; }
+.continue-meta .reciter { font-size: 0.76rem; color: var(--ivory-faint); }
+.continue-play { margin-inline-start: auto; width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--line-strong); background: none; color: var(--ivory); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+/* =========================================================
+   SURAH READER
+   ========================================================= */
+.reader-header { text-align: center; padding: 34px 20px 44px; border-bottom: 1px solid var(--line); margin-bottom: 34px; position: relative; }
+.reader-nav-btn { position: absolute; top: 34px; width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--line-strong); background: none; color: var(--ivory); display: flex; align-items: center; justify-content: center; }
+.reader-nav-btn.prev { inset-inline-start: 0; }
+.reader-nav-btn.next { inset-inline-end: 0; }
+.reader-header .ar-name { font-family: 'Amiri Quran'; font-size: clamp(2.4rem, 6vw, 3.6rem); color: var(--gold-bright); }
+.reader-header .en-name { font-family: 'Cormorant Garamond'; font-style: italic; font-size: 1.3rem; color: var(--ivory-dim); margin-top: 6px; }
+.reader-header .info-line { font-size: 0.8rem; color: var(--ivory-faint); margin-top: 12px; }
+.reader-header .basmala { font-family: 'Amiri Quran'; font-size: 1.6rem; color: var(--gold); margin-top: 22px; }
+.reader-tools { display: flex; justify-content: center; gap: 10px; margin-bottom: 34px; flex-wrap: wrap; }
+.verses { max-width: 800px; margin: 0 auto; }
+.verse { display: flex; gap: 16px; align-items: flex-start; padding: 24px 8px; border-bottom: 1px dashed var(--line); scroll-margin-top: 100px; }
+.verse.playing { background: rgba(201, 162, 76, 0.06); border-radius: var(--radius-m); }
+.verse-num { flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line-strong); color: var(--gold-bright); display: flex; align-items: center; justify-content: center; font-size: 0.74rem; margin-top: 4px; }
+.verse-body { flex: 1; }
+.verse-ar { text-align: justify; }
+.verse-actions { display: flex; gap: 8px; margin-top: 10px; }
+
+/* =========================================================
+   AI / HIFZ PANELS
+   ========================================================= */
+.ai-panel { max-width: 800px; margin: 0 auto; padding: 36px clamp(20px, 4vw, 42px); }
+.ai-panel-head { display: flex; align-items: center; gap: 16px; margin-bottom: 6px; }
+.ai-badge { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--gold-bright), var(--teal-bright)); display: flex; align-items: center; justify-content: center; color: #122019; flex-shrink: 0; }
+.ai-disclaimer { font-size: 0.78rem; color: var(--ivory-faint); border-inline-start: 2px solid var(--gold-dim); padding-inline-start: 14px; margin: 16px 0 24px; }
+.ai-results { margin-top: 24px; display: flex; flex-direction: column; gap: 14px; }
+.ai-result-card { padding: 18px 20px; }
+.ai-result-tag { font-size: 0.68rem; color: var(--teal-bright); margin-bottom: 8px; }
+.ai-thinking { display: flex; gap: 6px; align-items: center; color: var(--ivory-faint); font-size: 0.85rem; padding: 10px 0; }
+.dot-pulse { width: 6px; height: 6px; border-radius: 50%; background: var(--gold-bright); animation: pulse 1s ease-in-out infinite; }
+.dot-pulse:nth-child(2) { animation-delay: .15s; }
+.dot-pulse:nth-child(3) { animation-delay: .3s; }
+@keyframes pulse { 0%, 100% { opacity: .3; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.1); } }
+
+.hifz-panel { max-width: 720px; margin: 0 auto; padding: 30px; }
+.hifz-progress-track { height: 8px; border-radius: 999px; background: rgba(128, 128, 128, 0.12); overflow: hidden; margin: 14px 0 6px; }
+.hifz-progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-bright)); transition: width 0.3s var(--ease); }
+.hifz-ayah-hidden { filter: blur(8px); user-select: none; transition: filter 0.2s var(--ease); }
+.hifz-controls { display: flex; gap: 12px; flex-wrap: wrap; margin: 20px 0; }
+.hifz-controls .field { max-width: 160px; }
+
+/* =========================================================
+   BOOKMARKS PAGE
+   ========================================================= */
+.bookmark-item { display: flex; flex-direction: column; gap: 10px; padding: 18px 20px; border: 1px solid var(--line); border-radius: var(--radius-m); margin-bottom: 12px; }
+.bookmark-item textarea { width: 100%; background: rgba(128, 128, 128, 0.06); border: 1px solid var(--line); border-radius: var(--radius-s); color: var(--ivory); padding: 8px 12px; font-family: inherit; font-size: 0.85rem; resize: vertical; min-height: 44px; }
+.bookmark-actions { display: flex; gap: 8px; }
+
+/* =========================================================
+   SETTINGS PAGE
+   ========================================================= */
+.settings-group { margin-bottom: 34px; }
+.settings-group h3 { font-size: 1rem; color: var(--gold-bright); margin-bottom: 14px; }
+.settings-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.settings-row label { font-size: 0.9rem; }
+.settings-row select, .settings-row input[type="range"] { min-width: 140px; }
+.toggle { position: relative; width: 44px; height: 24px; border-radius: 999px; background: rgba(128, 128, 128, 0.2); border: none; cursor: pointer; }
+.toggle.on { background: var(--gold); }
+.toggle::after { content: ''; position: absolute; top: 3px; inset-inline-start: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; transition: inset-inline-start 0.2s var(--ease); }
+.toggle.on::after { inset-inline-start: 23px; }
+
+/* =========================================================
+   STICKY PLAYER
+   ========================================================= */
+.player {
+  position: fixed; bottom: var(--bottom-nav-h, 0px); inset-inline: 0; z-index: 60;
+  background: rgba(8, 20, 17, 0.94); backdrop-filter: blur(16px); border-top: 1px solid var(--line-strong);
+}
+:root[data-theme='light'] .player { background: rgba(250, 246, 236, 0.96); }
+.player-progress-track { position: relative; height: 4px; width: 100%; background: rgba(128, 128, 128, 0.15); cursor: pointer; }
+.player-progress-track.thin { border-radius: 999px; flex: 1; }
+.player-progress-fill { position: absolute; inset-inline-start: 0; top: 0; bottom: 0; background: var(--gold-bright); width: 0%; }
+.player-inner { display: flex; align-items: center; gap: 18px; padding: 12px clamp(14px, 4vw, 30px); flex-wrap: wrap; }
+.player-meta { display: flex; align-items: center; gap: 12px; min-width: 0; flex: 1 1 200px; }
+.player-art { width: 46px; height: 46px; border-radius: 12px; flex-shrink: 0; background: linear-gradient(135deg, var(--teal-bright), var(--bg-panel-2)); display: flex; align-items: center; justify-content: center; color: var(--gold-bright); }
+.player.playing .player-art { animation: spin 6s linear infinite; }
+@keyframes spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+.player-text .surah-name { font-size: 0.88rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.player-text .reciter-name { font-size: 0.74rem; color: var(--ivory-faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.player-controls { display: flex; align-items: center; gap: 12px; flex: 0 0 auto; }
+.play-pause { width: 44px; height: 44px; border-radius: 50%; background: var(--gold-bright); color: #152019; display: flex; align-items: center; justify-content: center; border: none; }
+.play-pause svg { width: 17px; height: 17px; }
+.play-pause .spin { animation: spin 1s linear infinite; }
+.time-row { display: flex; align-items: center; gap: 10px; flex: 1 1 220px; font-size: 0.7rem; color: var(--ivory-faint); }
+.player-extra { display: flex; align-items: center; gap: 12px; flex: 0 0 auto; }
+.speed-select { background: rgba(128, 128, 128, 0.08); border: 1px solid var(--line); color: var(--ivory); border-radius: 999px; padding: 5px 10px; font-size: 0.76rem; }
+.volume-row { display: flex; align-items: center; gap: 6px; }
+.volume-row input[type="range"] { width: 70px; accent-color: var(--gold-bright); }
+@media (max-width: 760px) { .time-row, .player-extra .volume-row { display: none; } }
+
+/* =========================================================
+   SEARCH OVERLAY
+   ========================================================= */
+.search-overlay { position: fixed; inset: 0; z-index: 100; background: rgba(4, 12, 10, 0.82); backdrop-filter: blur(6px); display: flex; align-items: flex-start; justify-content: center; padding: 8vh 20px; }
+.search-box { width: 100%; max-width: 620px; padding: 22px; }
+.search-box .field { padding: 15px 20px; margin-bottom: 16px; }
+.search-close { display: flex; justify-content: flex-end; margin-bottom: 8px; }
+.search-results { max-height: 55vh; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; }
+.search-result-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: var(--radius-m); background: none; border: none; color: var(--ivory); text-align: start; }
+.search-result-item:hover { background: rgba(201, 162, 76, 0.08); }
+.search-result-item .cat { font-size: 0.66rem; color: var(--teal-bright); border: 1px solid var(--line); padding: 3px 9px; border-radius: 999px; flex-shrink: 0; }
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+footer { border-top: 1px solid var(--line); padding: 46px clamp(16px, 5vw, 48px) calc(var(--bottom-nav-h, 0px) + 90px); }
+.footer-inner { max-width: 1240px; margin: 0 auto; display: flex; justify-content: space-between; gap: 26px; flex-wrap: wrap; }
+.footer-brand .credit { font-size: 0.8rem; color: var(--ivory-faint); margin-top: 6px; }
+.footer-meta { font-size: 0.74rem; color: var(--ivory-faint); text-align: end; }
+.footer-meta a { color: var(--teal-bright); }
+.footer-meta a:hover { text-decoration: underline; }
+.footer-meta .attribution { margin-top: 6px; opacity: 0.8; }

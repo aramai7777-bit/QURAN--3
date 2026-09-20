@@ -1,0 +1,14 @@
+{
+  "name": "Quran 3 — القرآن الكريم",
+  "short_name": "Quran 3",
+  "description": "Listen, read and reflect on the Holy Quran with verified text and recitations.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#081815",
+  "theme_color": "#081815",
+  "dir": "rtl",
+  "lang": "ar",
+  "icons": [
+    { "src": "/icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
