@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>iLearn — تعلم HTML من الصفر</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b1220'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='24' font-weight='700' fill='%23f16529' text-anchor='middle'%3E%26lt%3B/%26gt%3B%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b1220;
+    --bg-soft:#111a2e;
+    --card:#141d33;
+    --text:#eef2ff;
+    --muted:#93a0c2;
+    --html-orange:#e34f26;
+    --html-orange-light:#f16529;
+    --accent-blue:#4f9cff;
+    --accent-green:#3ddc97;
+    --border: rgba(255,255,255,0.08);
+    box-sizing:border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  html{scroll-padding-top: env(safe-area-inset-top, 0px);}
+  *{box-sizing:inherit; margin:0; padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Tajawal',sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  header{
+    position:sticky; top:0;
+    padding: 16px 6vw calc(16px + env(safe-area-inset-top,0px));
+    padding-top: calc(16px + env(safe-area-inset-top,0px));
+    display:flex; justify-content:space-between; align-items:center;
+    background:rgba(11,18,32,0.85);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--border);
+    z-index:50;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-weight:900; font-size:1.15rem;
+  }
+  .brand-tag{
+    font-family:'JetBrains Mono',monospace;
+    color:var(--html-orange-light);
+    font-size:0.95rem;
+    border:1px solid var(--html-orange);
+    padding:2px 8px;
+    border-radius:4px;
+  }
+  .avatar{
+    width:34px; height:34px; border-radius:50%;
+    object-fit:cover; border:2px solid var(--html-orange-light);
+  }
+  nav a{
+    color:var(--muted); text-decoration:none; margin-inline-start:28px; font-size:0.95rem;
+    transition: color .2s;
+  }
+  nav a:hover{color:var(--text);}
+  .yt-btn{
+    display:inline-flex; align-items:center; gap:6px;
+    color:#fff; background:#e33; border-radius:6px; padding:8px 14px;
+    text-decoration:none; font-size:0.85rem; font-weight:700;
+    margin-inline-start:20px;
+  }
+  .yt-btn:hover{filter:brightness(1.1);}
+
+  .hero{
+    display:grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap:48px;
+    align-items:center;
+    padding: 8vh 6vw 10vh;
+    max-width:1200px;
+    margin:0 auto;
+  }
+  @media (max-width:860px){ .hero{grid-template-columns:1fr; padding-top:6vh;} }
+
+  .eyebrow{
+    display:inline-block;
+    color:var(--html-orange-light);
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.85rem;
+    margin-bottom:18px;
+  }
+  h1{
+    font-size:clamp(2.1rem, 4.4vw, 3.4rem);
+    font-weight:900;
+    line-height:1.25;
+    margin-bottom:20px;
+  }
+  h1 span{color:var(--html-orange-light);}
+  .lede{
+    color:var(--muted);
+    font-size:1.1rem;
+    max-width:46ch;
+    margin-bottom:34px;
+  }
+  .cta-row{display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{
+    display:inline-block;
+    padding:14px 28px;
+    border-radius:8px;
+    font-weight:700;
+    text-decoration:none;
+    font-size:1rem;
+    transition: transform .15s ease;
+  }
+  .btn:active{transform:scale(0.97);}
+  .btn-primary{
+    background: linear-gradient(135deg, var(--html-orange) 0%, var(--html-orange-light) 100%);
+    color:#0b1220;
+  }
+  .btn-ghost{
+    border:1px solid var(--border);
+    color:var(--text);
+  }
+  .btn:hover{filter:brightness(1.08);}
+
+  /* Live code demo */
+  .demo{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.6);
+  }
+  .demo-bar{
+    display:flex; align-items:center; gap:8px;
+    padding:12px 16px;
+    background:var(--bg-soft);
+    border-bottom:1px solid var(--border);
+  }
+  .dot{width:11px; height:11px; border-radius:50%;}
+  .dot:nth-child(1){background:#ff5f57;}
+  .dot:nth-child(2){background:#febc2e;}
+  .dot:nth-child(3){background:#28c840;}
+  .demo-title{margin-inline-start:10px; color:var(--muted); font-size:0.8rem; font-family:'JetBrains Mono',monospace;}
+  .demo-body{padding:22px; min-height:190px;}
+  #code-line{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.98rem;
+    color:var(--accent-green);
+    white-space:pre-wrap;
+    direction:ltr; text-align:left;
+    min-height:26px;
+  }
+  #code-line .tag{color:var(--accent-blue);}
+  .caret{
+    display:inline-block; width:8px; height:1.1em;
+    background:var(--html-orange-light);
+    vertical-align:text-bottom;
+    animation: blink 0.9s steps(1) infinite;
+  }
+  @keyframes blink{50%{opacity:0;}}
+  .preview{
+    border-top:1px dashed var(--border);
+    margin-top:18px;
+    padding-top:18px;
+    direction:ltr; text-align:left;
+  }
+  #preview-render{transition: opacity .3s ease;}
+  #preview-render h2{color:var(--text); font-size:1.3rem; margin-bottom:6px;}
+  #preview-render p{color:var(--muted); font-size:0.95rem;}
+  #preview-render img{display:block; margin-top:8px;}
+  .badge{
+    display:inline-block; background:rgba(61,220,151,0.12); color:var(--accent-green);
+    border:1px solid rgba(61,220,151,0.3); font-family:'JetBrains Mono',monospace;
+    font-size:0.75rem; padding:3px 8px; border-radius:5px; margin-bottom:10px;
+  }
+
+  section{padding:8vh 6vw; max-width:1200px; margin:0 auto;}
+  .section-head{margin-bottom:48px; max-width:60ch;}
+  .section-head .eyebrow{margin-bottom:10px;}
+  h2.section-title{font-size:clamp(1.6rem,3vw,2.2rem); font-weight:900;}
+  .section-head p{color:var(--muted); margin-top:12px;}
+
+  .track{
+    position:relative;
+    padding-inline-start:28px;
+    border-inline-start:2px solid var(--border);
+  }
+  .ep{
+    position:relative;
+    padding: 18px 22px;
+    margin-bottom:14px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    display:flex; align-items:center; gap:16px;
+    transition: border-color .2s, transform .2s;
+  }
+  .ep:hover{border-color:var(--html-orange); transform:translateX(-4px);}
+  [dir="rtl"] .ep:hover{transform:translateX(4px);}
+  .ep::before{
+    content:"";
+    position:absolute; inset-inline-start:-34px; top:50%; transform:translateY(-50%);
+    width:12px; height:12px; border-radius:50%;
+    background:var(--bg); border:2px solid var(--html-orange);
+  }
+  .ep-num{
+    font-family:'JetBrains Mono',monospace;
+    color:var(--html-orange-light);
+    font-weight:700;
+    min-width:34px;
+  }
+  .ep-title{font-weight:700;}
+  a.ep-link{
+    text-decoration:none; color:var(--text);
+    border-color: rgba(241,101,41,0.3);
+  }
+  .ep-play{
+    margin-inline-start:auto;
+    background:var(--html-orange);
+    color:#fff; width:28px; height:28px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:0.7rem; flex-shrink:0;
+  }
+  .ep-more{color:var(--muted); font-size:0.9rem; text-align:center; padding-top:8px;}
+
+  .pillars{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+  }
+  @media (max-width:760px){.pillars{grid-template-columns:1fr;}}
+  .pillar{
+    background:var(--card); border:1px solid var(--border); border-radius:12px; padding:26px;
+  }
+  .pillar .mono{color:var(--html-orange-light); font-size:0.85rem; display:block; margin-bottom:10px;}
+  .pillar h3{font-size:1.15rem; margin-bottom:8px;}
+  .pillar p{color:var(--muted); font-size:0.92rem;}
+
+  footer{
+    padding:5vh 6vw calc(5vh + env(safe-area-inset-bottom,0px));
+    border-top:1px solid var(--border);
+    color:var(--muted);
+    text-align:center;
+    font-size:0.9rem;
+  }
+  footer .mono{color:var(--html-orange-light);}
+
+  @media (prefers-reduced-motion: reduce){
+    .caret{animation:none; opacity:1;}
+  }
+
+  /* Intro splash */
+  #loader{
+    position:fixed; inset:0; z-index:9999;
+    background:var(--bg);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:14px;
+    transition: opacity .5s ease, visibility .5s ease;
+  }
+  #loader.hide{ opacity:0; visibility:hidden; pointer-events:none; }
+  .loader-logo{
+    font-size:2.4rem; font-weight:700; color:var(--accent-blue);
+    animation: pop-in .5s ease both;
+  }
+  .loader-logo #loader-tag{ color:var(--html-orange-light); display:inline-block; animation: spin-tag 1.1s ease-in-out .5s; }
+  @keyframes pop-in{ from{opacity:0; transform:scale(.7);} to{opacity:1; transform:scale(1);} }
+  @keyframes spin-tag{ 0%{transform:rotate(0);} 50%{transform:rotate(180deg);} 100%{transform:rotate(360deg);} }
+  #loader-text{
+    color:var(--text); font-size:1.15rem; min-height:1.4em;
+    white-space:pre;
+  }
+  .loader-tagline{
+    color:var(--muted); font-size:0.85rem; font-family:'JetBrains Mono',monospace;
+    opacity:0; animation: fade-up .5s ease 1.7s forwards;
+  }
+  .loader-tagline span{color:var(--html-orange-light);}
+  @keyframes fade-up{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+
+  body.js-ready .hero, body.js-ready header{
+    animation: site-in .6s ease both;
+  }
+  @keyframes site-in{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
+
+  @media (prefers-reduced-motion: reduce){
+    #loader{ display:none; }
+    .loader-logo, .loader-tagline, body.js-ready .hero, body.js-ready header{ animation:none !important; opacity:1 !important; transform:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div id="loader" aria-hidden="true">
+  <div class="loader-logo mono">&lt;<span id="loader-tag">/</span>&gt;</div>
+  <div id="loader-text" class="mono"></div>
+  <div class="loader-tagline">Learn <span>•</span> Build <span>•</span> Grow</div>
+</div>
+<script>
+(function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var loader = document.getElementById('loader');
+  var loaderText = document.getElementById('loader-text');
+  var fullText = 'iLearn';
+
+  function finishLoader(){
+    document.body.classList.add('js-ready');
+    if(loader){
+      loader.classList.add('hide');
+      setTimeout(function(){ loader.remove(); }, 550);
+    }
+  }
+
+  if(reduced || !loader){
+    finishLoader();
+  } else {
+    var i = 0;
+    setTimeout(function typeTitle(){
+      loaderText.textContent = fullText.slice(0, ++i);
+      if(i < fullText.length){ setTimeout(typeTitle, 90); }
+    }, 650);
+    setTimeout(finishLoader, 2200);
+  }
+})();
+</script>
+
+<header>
+  <div class="brand">
+    <img class="avatar" src="data:image/jpeg;base64,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" alt="Anas Mohamed">
+    Anas Mohamed
+  </div>
+  <nav>
+    <a href="#episodes">الحلقات</a>
+    <a href="#about">عن الكورس</a>
+    <a class="yt-btn" href="https://youtube.com/@ilearn-m6g" target="_blank" rel="noopener">▶ يوتيوب</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div>
+    <span class="eyebrow mono">Learn • Build • Grow</span>
+    <h1>اتعلّم HTML من الصفر… <span>وابني أول موقع حقيقي بإيدك</span></h1>
+    <p class="lede">كورس iLearn: 20 حلقة بالعربي، من أول سطر HTML لحد مشروع صفحة شخصية كاملة تقدر تفتخر بيها.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://youtube.com/@ilearn-m6g" target="_blank" rel="noopener">شاهد على يوتيوب</a>
+      <a class="btn btn-ghost" href="#episodes">اعرف خطة الكورس</a>
+    </div>
+  </div>
+
+  <div class="demo">
+    <div class="demo-bar">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="demo-title">index.html</span>
+    </div>
+    <div class="demo-body">
+      <div id="code-line" class="mono"><span class="caret"></span></div>
+      <div class="preview">
+        <div class="badge">Live Preview</div>
+        <div id="preview-render"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="episodes">
+  <div class="section-head">
+    <span class="eyebrow mono">خطة الكورس</span>
+    <h2 class="section-title">20 حلقة هتاخدك من الصفر للاحتراف</h2>
+    <p>كل حلقة بسكريبت كامل وهدف واضح — من أول فتح VS Code لحد رفع مشروعك بنفسك.</p>
+  </div>
+  <div class="track" id="track"></div>
+</section>
+
+<section id="about">
+  <div class="section-head">
+    <span class="eyebrow mono">ليه iLearn</span>
+    <h2 class="section-title">مبني عشان تفهم، مش تحفظ</h2>
+  </div>
+  <div class="pillars">
+    <div class="pillar">
+      <span class="mono">01 / practical</span>
+      <h3>تطبيق فوري</h3>
+      <p>كل حلقة بتنتهي بكود شغال تقدر تفتحه في المتصفح على طول.</p>
+    </div>
+    <div class="pillar">
+      <span class="mono">02 / arabic</span>
+      <h3>شرح بالعربي 100%</h3>
+      <p>من غير مصطلحات معقدة — كل حاجة بتتشرح بلغة بسيطة وواضحة.</p>
+    </div>
+    <div class="pillar">
+      <span class="mono">03 / project</span>
+      <h3>مشروع حقيقي في الآخر</h3>
+      <p>تخرج من الكورس ومعاك صفحة شخصية كاملة تقدر تحطها في الـ CV بتاعك.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="mono">&lt;/&gt;</span> iLearn — Learn • Build • Grow — by Eng: Anas
+</footer>
+
+<script>
+(function(){
+  var lines = [
+    {code:'<h1>مرحباً بك في iLearn</h1>', render:function(el){el.innerHTML='<h2>مرحباً بك في iLearn</h2>';}},
+    {code:'<p>هتتعلم HTML خطوة بخطوة.</p>', render:function(el){el.innerHTML+='<p>هتتعلم HTML خطوة بخطوة.</p>';}},
+    {code:'<img src="project.png">', render:function(el){el.innerHTML+='<div style="margin-top:10px;width:100%;height:60px;border-radius:6px;background:linear-gradient(135deg,#e34f26,#4f9cff);"></div>';}}
+  ];
+  var codeEl = document.getElementById('code-line');
+  var previewEl = document.getElementById('preview-render');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function typeLine(text, cb){
+    var i = 0;
+    codeEl.innerHTML = '';
+    var span = document.createElement('span');
+    codeEl.appendChild(span);
+    var caret = document.createElement('span');
+    caret.className='caret';
+    codeEl.appendChild(caret);
+    if(reduced){ span.textContent = text; return cb(); }
+    var interval = setInterval(function(){
+      span.textContent = text.slice(0, ++i);
+      if(i >= text.length){ clearInterval(interval); setTimeout(cb, 500); }
+    }, 35);
+  }
+
+  function runSequence(idx){
+    if(idx >= lines.length){
+      setTimeout(function(){
+        previewEl.innerHTML = '';
+        typeLine('', function(){ runSequence(0); });
+      }, 1800);
+      return;
+    }
+    typeLine(lines[idx].code, function(){
+      lines[idx].render(previewEl);
+      setTimeout(function(){ runSequence(idx+1); }, 900);
+    });
+  }
+  runSequence(0);
+
+  var episodes = [
+    {title:"HTML من الصفر", url:"https://youtu.be/jT6raDu7KZo"},
+    {title:"VS Code", url:"https://youtu.be/dH1LPm2grBg"},
+    {title:"Head و Body", url:"https://youtu.be/DlPFMSgpIh8"},
+    {title:"أول صفحة في 5 دقائق"},
+    {title:"HTML Tags"},
+    {title:"العناوين h1-h6"},
+    {title:"Paragraph"},
+    {title:"Links"},
+    {title:"Images"},
+    {title:"Lists"},
+    {title:"Table"},
+    {title:"Forms"},
+    {title:"Input و Button"},
+    {title:"Attributes"},
+    {title:"Semantic Tags"},
+    {title:"Navbar"},
+    {title:"صفحة Profile"},
+    {title:"مشروع صفحة شخصية"},
+    {title:"أخطاء شائعة"},
+    {title:"HTML Quiz + CSS Next"}
+  ];
+  var track = document.getElementById('track');
+  episodes.forEach(function(item, i){
+    var num = String(i+1).padStart(2,'0');
+    var inner = '<span class="ep-num mono">'+num+'</span><span class="ep-title">'+item.title+'</span>';
+    if(item.url){
+      var a = document.createElement('a');
+      a.className = 'ep ep-link';
+      a.href = item.url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.innerHTML = inner + '<span class="ep-play">▶</span>';
+      track.appendChild(a);
+    } else {
+      var div = document.createElement('div');
+      div.className = 'ep';
+      div.innerHTML = inner;
+      track.appendChild(div);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
